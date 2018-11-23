@@ -1,0 +1,37 @@
+spring:
+  application:
+    name: pan-sso
+  profiles: sso1
+server:
+  port: 8901
+eureka:
+  client:
+    serviceUrl:
+       defaultZone: http://peer1:8000/eureka/,http://peer2:8001/eureka/,http://peer3:8002/eureka/
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 3000
+--- #三个减号
+spring:
+  application:
+    name: pan-sso
+  profiles: sso2
+server:
+  port: 8902
+eureka:
+  client:
+    serviceUrl:
+       defaultZone: http://peer1:8000/eureka/,http://peer2:8001/eureka/,http://peer3:8002/eureka/
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 3000    #设置hystrix的默认时间为3秒   默认时间为1秒
+
+      #hystrix.command.default.execution.timeout.enabled: false   该配置，用于禁用Hystrix的超时时间
